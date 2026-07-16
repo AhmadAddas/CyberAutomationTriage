@@ -1,22 +1,22 @@
-from pathlib import Path
 import json
+from pathlib import Path
+from typing import Any
 
-def main() -> None:
-    alert_path = Path("examples/alert.json")
+
+def load_alert(path: str) -> dict[str, Any]:
+    alert_path = Path(path)
 
     with alert_path.open("r", encoding="utf-8") as file:
-        alert = json.load(file)
-    print()
-    print("====JSON====")
-    print(alert)
-    print("============")
-    print()
-    print("==Objects===")
-    print(alert["alert_id"])
-    print(alert["source_ip"])
-    print(alert["domain"])
-    print("============")
-    print()
+        return json.load(file)
+
+
+def main() -> None:
+    alert = load_alert("examples/alert.json")
+
+    print(f"Alert ID: {alert['alert_id']}")
+    print(f"Source IP: {alert['source_ip']}")
+    print(f"Domain: {alert['domain']}")
+
 
 if __name__ == "__main__":
     main()
