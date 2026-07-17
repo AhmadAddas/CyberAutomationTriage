@@ -2,6 +2,8 @@ import json
 from pathlib import Path
 from typing import Any
 from app.intel import lookup_indicator
+from app.risk import calculate_risk
+from app.risk import get_risk_level
 
 def load_alert(path: str) -> dict[str, Any]:
     alert_path = Path(path)
@@ -38,6 +40,15 @@ def main() -> None:
 
     for result in results:
         print(result)
+
+    print()
+
+    print("Score")
+    score = calculate_risk(results)
+    risk_level = get_risk_level(score)
+
+    print(f"Risk score: {score}")
+    print(f"Risk level: {risk_level}")
 
     print()
 

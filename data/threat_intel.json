@@ -1,0 +1,23 @@
+{
+  "185.220.101.4": {
+    "malicious": true,
+    "confidence": 90,
+    "tags": [
+      "suspicious",
+      "known-threat"
+    ]
+  },
+  "evil-example.com": {
+    "malicious": true,
+    "confidence": 95,
+    "tags": [
+      "malware",
+      "command-and-control"
+    ]
+  },
+  "8.8.8.8": {
+    "malicious": false,
+    "confidence": 0,
+    "tags": []
+  }
+}
