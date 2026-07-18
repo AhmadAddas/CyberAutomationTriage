@@ -1,0 +1,32 @@
+{
+  "alert_id": "INC-001",
+  "risk_score": 80,
+  "risk_level": "HIGH",
+  "indicators": [
+    {
+      "indicator": "185.220.101.4",
+      "found": true,
+      "malicious": true,
+      "confidence": 90,
+      "tags": [
+        "suspicious",
+        "known-threat"
+      ]
+    },
+    {
+      "indicator": "evil-example.com",
+      "found": true,
+      "malicious": true,
+      "confidence": 95,
+      "tags": [
+        "malware",
+        "command-and-control"
+      ]
+    }
+  ],
+  "findings": [
+    "185.220.101.4 was identified as malicious",
+    "evil-example.com was identified as malicious"
+  ],
+  "recommended_action": "Escalate for immediate analyst review"
+}
