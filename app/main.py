@@ -4,6 +4,45 @@ from typing import Any
 from app.intel import lookup_indicator
 from app.risk import calculate_risk
 from app.risk import get_risk_level
+from app.models import Alert
+from app.report import build_report
+
+from fastapi import FastAPI
+
+app = FastAPI(
+    title="Cyber Automation Triage API",
+    version="1.0.0",
+)
+
+@app.get("/health")
+def health_check() -> dict[str, str]:
+    return {"status": "ok"}
+
+@app.post("/analyze")
+def analyze_alert(alert: Alert):
+    alert_data = alert.model_dump()
+
+    results = [
+        lookup_indicator(alert.source_ip),
+        lookup_indicator(alert.domain),
+    ]
+
+    score = calculate_risk(results)
+
+    risk_level = get_risk_level(score)
+
+    report = build_report(
+        alert=alert_data,
+        results=results,
+        score=score,
+        risk_level=risk_level,
+    )
+
+    return report
+
+
+print()
+
 
 def load_alert(path: str) -> dict[str, Any]:
     alert_path = Path(path)
